@@ -1,124 +1,44 @@
-/* ======= Base Page Styling ======= */
 body {
-    background-color: #f5f7fa;
-    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 0;
-    color: #2d3436;
 }
 
-/* ======= Header Styling ======= */
 h2 {
     text-align: center;
-    margin: 40px 0 20px;
-    font-size: 30px;
-    color: #222f3e;
+    color: #333;
+    padding-top: 20px;
     font-weight: 600;
 }
 
-/* ======= Upload Component ======= */
 #upload-data {
-    background-color: #ffffff;
-    border: 2px dashed #00a8e8;
-    color: #0077b6;
-    padding: 12px;
-    margin: 20px auto;
-    width: 92%;
-    max-width: 700px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.3s ease-in-out;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
 }
 
 #upload-data:hover {
-    border-color: #005f99;
-    background-color: #f0fbff;
-    color: #005f99;
+    border-color: #666;
 }
 
-/* ======= Table Styling ======= */
-.dash-table-container .dash-spreadsheet {
-    margin: 30px auto;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    overflow-x: auto;
-    max-width: 95%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
-}
-
-.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner {
-    padding: 10px;
-}
-
-.dash-header {
-    background-color: #0077b6 !important;
-    color: #ffffff !important;
-    font-weight: bold;
-}
-
-.dash-cell {
-    padding: 8px;
-    font-size: 14px;
-}
-
-/* ======= Graph Styling ======= */
-#churn-graph {
-    margin: 30px auto;
-    max-width: 95%;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+.DataTable {
     background-color: white;
-    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin: 20px;
+    overflow-x: auto;
 }
 
-/* ======= Download Link Styling ======= */
 a {
     display: block;
-    width: fit-content;
-    margin: 30px auto 50px;
-    background-color: #0077b6;
-    color: white;
-    padding: 12px 24px;
-    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    font-weight: bold;
     text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    font-weight: 500;
 }
 
 a:hover {
-    background-color: #023e8a;
+    text-decoration: underline;
 }
-
-/* ======= Horizontal Rule ======= */
-hr {
-    border: 0;
-    border-top: 1px solid #d6dee3;
-    margin: 40px auto;
-    max-width: 90%;
-}
-
-/* ======= Responsive Design ======= */
-@media only screen and (max-width: 768px) {
-    h2 {
-        font-size: 24px;
-    }
-
-    #upload-data {
-        font-size: 15px;
-    }
-
-    .dash-cell {
-        font-size: 13px;
-    }
-
-    a {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-}
-
-
