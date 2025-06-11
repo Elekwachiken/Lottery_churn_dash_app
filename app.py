@@ -130,8 +130,9 @@ def update_output(contents, filename):
 # # Run local server
 # if __name__ == '__main__':
 #     app.run(debug=True)
+# app.run(host='0.0.0.0', port=8080)
 # For Render server
-server = app.server  
+server = app.server  # Expose server for Gunicorn
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)
 
