@@ -1,44 +1,57 @@
 body {
-    background-color: #f9f9f9;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
+  background-color: #f8fafc;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
 }
 
 h2 {
-    text-align: center;
-    color: #333;
-    padding-top: 20px;
-    font-weight: 600;
+  text-align: center;
+  color: #0a2342;
+  margin-top: 30px;
 }
 
-#upload-data {
-    border: 2px dashed #aaa;
-    border-radius: 8px;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
+.navbar {
+  background-color: #0a2342;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#upload-data:hover {
-    border-color: #666;
+.navbar img {
+  height: 40px;
 }
 
-.DataTable {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin: 20px;
-    overflow-x: auto;
+.upload-box {
+  border: 2px dashed #94a3b8;
+  background-color: #f1f5f9;
+  padding: 20px;
+  margin: 20px auto;
+  text-align: center;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.upload-box:hover {
+  border-color: #2563eb;
+  background-color: #e2e8f0;
 }
 
 a {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
+  text-decoration: none;
+  font-weight: 600;
+  color: #1e3a8a;
+  display: block;
+  margin: 15px auto;
+  text-align: center;
 }
 
-a:hover {
-    text-decoration: underline;
+footer {
+  background-color: #e2e8f0;
+  padding: 15px;
+  text-align: center;
+  color: #475569;
+  font-size: 14px;
+  margin-top: 40px;
 }
