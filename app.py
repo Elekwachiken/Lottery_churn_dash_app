@@ -132,7 +132,7 @@ def update_output(contents, filename):
 #     app.run(debug=True)
 # app.run(host='0.0.0.0', port=8080)
 # For Render server deployment
-server = app.server  # Expose Flask server for Gunicorn
+# server = app.server  # Expose Flask server for Gunicorn
 
 if __name__ == '__main__':
     app.run(debug=True)
