@@ -45,38 +45,68 @@ app.title = 'Lottery Churn Prediction App'
 #     html.Hr(),
 #     html.A("📥 Download Template", href='/assets/sample_input.csv', download='sample_input.csv')
 # ])
-app.layout = html.Div([
-    html.Div([
-        html.H2("🎲 Online Lottery Player Churn Prediction", style={'textAlign': 'center'}),
 
+# app.layout = html.Div([
+#     html.Div([
+#         html.H2("🎲 Online Lottery Player Churn Prediction", style={'textAlign': 'center'}),
+
+#         dcc.Upload(
+#             id='upload-data',
+#             children=html.Div(['📤 Drag & Drop or Click to Upload CSV File']),
+#             style={
+#                 'width': '100%',
+#                 'height': '60px',
+#                 'lineHeight': '60px',
+#                 'borderWidth': '2px',
+#                 'borderStyle': 'dashed',
+#                 'borderRadius': '10px',
+#                 'textAlign': 'center',
+#                 'margin': '10px auto',
+#                 'backgroundColor': '#f9f9f9',
+#                 'color': '#444'
+#             },
+#             multiple=False
+#         ),
+#     ], style={'maxWidth': '800px', 'margin': 'auto'}),
+
+#     html.Div(id='output-data-upload', style={'margin': '20px auto', 'maxWidth': '1000px'}),
+
+#     dcc.Graph(id='churn-graph', style={'marginTop': '40px'}),
+
+#     html.Hr(),
+#     html.Div([
+#         html.A("📥 Download Prediction Template (CSV)", href='/assets/sample_input.csv', download='sample_input.csv',
+#                style={'fontSize': '18px', 'color': '#007BFF'})
+#     ], style={'textAlign': 'center'})
+# ])
+
+app.layout = html.Div([
+    html.Div(className="navbar", children=[
+        html.Img(src='/assets/logo.png') if 'logo.png' else '',
+        html.H2("🎲 Online Lottery Churn Prediction")
+    ]),
+
+    html.Div([
         dcc.Upload(
             id='upload-data',
             children=html.Div(['📤 Drag & Drop or Click to Upload CSV File']),
-            style={
-                'width': '100%',
-                'height': '60px',
-                'lineHeight': '60px',
-                'borderWidth': '2px',
-                'borderStyle': 'dashed',
-                'borderRadius': '10px',
-                'textAlign': 'center',
-                'margin': '10px auto',
-                'backgroundColor': '#f9f9f9',
-                'color': '#444'
-            },
+            className='upload-box',
             multiple=False
         ),
-    ], style={'maxWidth': '800px', 'margin': 'auto'}),
+        
+        dcc.Loading(
+            id="loading-output",
+            type="circle",
+            children=[
+                html.Div(id='output-data-upload'),
+                dcc.Graph(id='churn-graph')
+            ]
+        ),
 
-    html.Div(id='output-data-upload', style={'margin': '20px auto', 'maxWidth': '1000px'}),
+        html.A("📥 Download Template CSV", href='/assets/sample_input.csv', download='sample_input.csv')
+    ]),
 
-    dcc.Graph(id='churn-graph', style={'marginTop': '40px'}),
-
-    html.Hr(),
-    html.Div([
-        html.A("📥 Download Prediction Template (CSV)", href='/assets/sample_input.csv', download='sample_input.csv',
-               style={'fontSize': '18px', 'color': '#007BFF'})
-    ], style={'textAlign': 'center'})
+    html.Footer("© 2025 Lottery Analytics App. Built by Kenneth")
 ])
 
 # Callback
