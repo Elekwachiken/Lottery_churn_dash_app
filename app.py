@@ -74,7 +74,7 @@ app.layout = html.Div([
 
     html.Hr(),
     html.Div([
-        html.A("📥 Download Template", href='/assets/sample_input.csv', download='sample_input.csv',
+        html.A("📥 Download Prediction Template (CSV)", href='/assets/sample_input.csv', download='sample_input.csv',
                style={'fontSize': '18px', 'color': '#007BFF'})
     ], style={'textAlign': 'center'})
 ])
