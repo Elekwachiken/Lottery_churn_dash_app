@@ -9,9 +9,9 @@ import io
 
 
 # Load model and trained encoders
-model = joblib.load('Lottery_churn_dash_app/model/churn_model.pkl')
-gender_encoder = joblib.load('Lottery_churn_dash_app/model/gender_encoder.pkl')
-country_encoder = joblib.load('Lottery_churn_dash_app/model/country_encoder.pkl')
+model = joblib.load('model/churn_model.pkl')
+gender_encoder = joblib.load('model/gender_encoder.pkl')
+country_encoder = joblib.load('model/country_encoder.pkl')
 
 # Define app
 app = dash.Dash(__name__)
@@ -127,6 +127,11 @@ def update_output(contents, filename):
 
     return html.Div(), {}
 
-# Run server
+# # Run local server
+# if __name__ == '__main__':
+#     app.run(debug=True)
+# For Render server
+server = app.server  
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
+
