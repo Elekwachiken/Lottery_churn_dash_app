@@ -13,10 +13,10 @@ model = joblib.load('model/churn_model.pkl')
 gender_encoder = joblib.load('model/gender_encoder.pkl')
 country_encoder = joblib.load('model/country_encoder.pkl')
 
-# Define app
-app = dash.Dash(__name__)
-server = app.server  # for deployment
-app.title = 'Lottery Churn Prediction App'
+# # Define app
+# app = dash.Dash(__name__)
+# server = app.server  # for deployment
+# app.title = 'Lottery Churn Prediction App'
 
 # App Layout
 # app.layout = html.Div([
@@ -80,34 +80,103 @@ app.title = 'Lottery Churn Prediction App'
 #     ], style={'textAlign': 'center'})
 # ])
 
+# app.layout = html.Div([
+#     html.Div(className="navbar", children=[
+#         html.Img(src='/assets/logo.png') if 'logo.png' else '',
+#         html.H2("🎲 Online Lottery Churn Prediction")
+#     ]),
+
+#     html.Div([
+#         dcc.Upload(
+#             id='upload-data',
+#             children=html.Div(['📤 Drag & Drop or Click to Upload CSV File']),
+#             className='upload-box',
+#             multiple=False
+#         ),
+        
+#         dcc.Loading(
+#             id="loading-output",
+#             type="circle",
+#             children=[
+#                 html.Div(id='output-data-upload'),
+#                 dcc.Graph(id='churn-graph')
+#             ]
+#         ),
+
+#         html.A("📥 Download Template CSV", href='/assets/sample_input.csv', download='sample_input.csv')
+#     ]),
+
+#     html.Footer("© 2025 Lottery Analytics App. Built by Kenneth")
+# ])
+
+# Define app
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
+server = app.server
+
+# Page Layouts
+landing_page = html.Div([
+    html.Div(className="navbar", children=[
+        html.Img(src='/assets/logo.png') if 'logo.png' else '',
+        html.H2("🎲 Lottery Churn Prediction")
+    ]),
+    html.Div([
+        html.H3("Welcome to the Churn Prediction App"),
+        html.P("This app helps you predict whether lottery players are likely to churn based on uploaded customer data. You can navigate between the tabs above to upload your CSV file, see predictions, and read more about the model."),
+        html.P("To begin, head to the 'Upload & Predict' tab.")
+    ], style={'padding': '20px'}),
+    html.Footer("© 2025 Lottery Analytics App. Built by Kenneth")
+])
+
+upload_page = html.Div([
+    html.H3("Upload Data & View Predictions"),
+    dcc.Upload(
+        id='upload-data',
+        children=html.Div(['📤 Drag & Drop or Click to Upload CSV File']),
+        className='upload-box',
+        multiple=False
+    ),
+    dcc.Loading(
+        id="loading-output",
+        type="circle",
+        children=[
+            html.Div(id='output-data-upload'),
+            dcc.Graph(id='churn-graph')
+        ]
+    ),
+    html.A("📥 Download Template CSV", href='/assets/sample_input.csv', download='sample_input.csv'),
+    html.Footer("© 2025 Lottery Analytics App. Built by Kenneth")
+])
+
+about_page = html.Div([
+    html.H3("About This App"),
+    html.P("This churn prediction model is trained using real-world anonymized data from lottery player behavior. The model uses features like demographics, transaction history, and gaming behavior to predict churn likelihood."),
+    html.P("The predictions help marketing and CRM teams design better re-engagement campaigns for players at risk of churning."),
+    html.Footer("Built using Dash and Plotly • Model: Random Forest Classifier • Maintained by Kenneth")
+])
+
+# Main App Layout with Tabs
 app.layout = html.Div([
     html.Div(className="navbar", children=[
         html.Img(src='/assets/logo.png') if 'logo.png' else '',
-        html.H2("🎲 Online Lottery Churn Prediction")
+        html.H2("🎲 Lottery Churn Prediction")
     ]),
 
-    html.Div([
-        dcc.Upload(
-            id='upload-data',
-            children=html.Div(['📤 Drag & Drop or Click to Upload CSV File']),
-            className='upload-box',
-            multiple=False
-        ),
-        
-        dcc.Loading(
-            id="loading-output",
-            type="circle",
-            children=[
-                html.Div(id='output-data-upload'),
-                dcc.Graph(id='churn-graph')
-            ]
-        ),
-
-        html.A("📥 Download Template CSV", href='/assets/sample_input.csv', download='sample_input.csv')
+    dcc.Tabs(id='tabs', value='tab-home', children=[
+        dcc.Tab(label='🏠 Home', value='tab-home'),
+        dcc.Tab(label='📤 Upload & Predict', value='tab-upload'),
+        dcc.Tab(label='ℹ️ About', value='tab-about')
     ]),
 
-    html.Footer("© 2025 Lottery Analytics App. Built by Kenneth")
+    html.Div(id='tabs-content')
 ])
+
+@app.callback(Output('tabs-content', 'children'), [Input('tabs', 'value')])
+def render_content(tab):
+    if tab == 'tab-upload':
+        return upload_page
+    elif tab == 'tab-about':
+        return about_page
+    return landing_page
 
 # Callback
 @app.callback(
