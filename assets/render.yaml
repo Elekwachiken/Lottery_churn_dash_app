@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: lottery-churn-dash-app
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:server
