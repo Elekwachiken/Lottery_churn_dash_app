@@ -1,160 +1,102 @@
-/* === Enhanced and Cleaned Up UI/UX Styles (Updated) === */
+/* --- Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
+
+/* #main-container
+  └── body-wrapper (controls sidebar vs. main-body arrangement)
+      ├── sidebar
+      └── main-body (controls navbar vs. content arrangement)
+          ├── navbar
+          └── content (where individual page layouts are displayed) */
+
+
+
+
+/* --- GENERAL STYLES --- */
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     font-family: 'Nunito', 'Segoe UI', 'Roboto', sans-serif;
-    background-color: #f5f7fa;
-    color: #2d3436;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: #f5f7fa; /* Light mode default background */
+    color: #333; /* Light mode default text color */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transitions */
 }
 
-.navbar {
-  background-color: #2c3e50;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
+
+/* Dark Mode Overrides for Body */
+body.dark-mode {
+    background-color: #1a1a2e;
+    color: #f1f1f1;
 }
 
-#page-container {
+/* Main App Container Structure */
+.main-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.body-wrapper { /* Contains Sidebar and Main Content Area */
+    display: flex;
+    flex-direction: row; /* Sidebar | Main Content */
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, content areas will scroll */
+    transition: all 0.3s ease;
 }
 
-footer {
-    margin-top: auto;
-    padding: 10px;
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    background-color: transparent;
+/* Adjust main-body when sidebar is collapsed */
+.sidebar-expanded .main-body {
+    margin-left: 250px; /* Default margin for expanded sidebar */
+    width: calc(100% - 250px); /* Default width for expanded sidebar */
 }
 
-/* === Sidebar Navigation === */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    padding: 20px 20px 10px 20px;
-    background: linear-gradient(120deg, #0f172a, #334155);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 1;
+.sidebar-collapsed .main-body {
+    margin-left: 60px; /* Adjust offset when sidebar collapses */
+    width: calc(100% - 60px);
 }
 
-.sidebar-title {
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-}
 
-.sidebar a.nav-link {
-    color: white;
-    font-size: 16px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar a.nav-link.active,
-.sidebar a.nav-link:hover {
-    background-color: #023e8a;
-    text-decoration: none;
-}
-
-/* Theme Toggle Positioning */
-.theme-section {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* === Content Area === */
-.content {
-    margin-left: 250px;
-    padding: 20px 10px 20px 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    width: calc(100% - 250px);
-    box-sizing: border-box;
-    background-color: inherit;
-}
-
-/* === Upload Box === */
-.upload-box {
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    border-width: 2px;
-    border-style: dashed;
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px auto 20px auto;
-    background-color: #ecf0f1;
-    color: #34495e;
-    font-weight: bold;
-    box-sizing: border-box;
-}
-
-.upload-box:hover {
-    border-color: #005f99;
-    background-color: #f0fbff;
-    color: #005f99;
-}
-
-.template-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    color: white;
-    background-color: #2980b2;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    text-align: center;
-}
-
-/* === Login Form === */
+/* --- LOGIN PAGE STYLES --- */
 .login-wrapper {
     display: flex;
     height: 100vh;
     width: 100vw;
-    background-color: #f8fafc;
-    font-family: "Nunito", sans-serif;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%); /* Always dark gradient */
+}
+
+body.dark-mode .login-wrapper {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%); /* Dark gradient for dark mode */
 }
 
 .login-left {
     flex: 1;
-    background: linear-gradient(120deg, #0f172a, #334155);
-    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px;
     text-align: center;
+    color: white;
 }
 
 .login-title {
-    font-size: 2em;
+    font-size: 2.8em;
+    font-weight: bold;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .login-image {
     max-width: 80%;
     height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
 }
 
 .login-right {
@@ -162,24 +104,57 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e2e8f0;
 }
 
+
 .login-form-box {
-    background-color: white;
+    background-color: #ffffff; /* White for light mode */
     padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .login-form-box {
+    background-color: #3c3c54; /* Darker background for form in dark mode */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-form-box h2 {
+    color: #007bff; /* Primary blue for light mode */
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+body.dark-mode .login-form-box h2 {
+    color: #87ceeb; /* Lighter blue for dark mode */
 }
 
 .login-input {
     width: 100%;
     padding: 12px;
-    margin: 10px 0;
     border-radius: 8px;
-    border: 1px solid #cbd5e0;
+    border: 1px solid #cbd5e0; /* Light border */
+    background-color: #f5f7fa; /* Light background */
+    color: #333; /* Dark text */
+    margin-bottom: 15px;
+}
+
+body.dark-mode .login-input {
+    border: 1px solid #555;
+    background-color: #2a2a3e;
+    color: #f1f1f1;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .login-btn {
@@ -191,102 +166,861 @@ footer {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .login-btn:hover {
     background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.logout-btn {
-    background-color: #ff5252;
+.login-message {
+    margin-top: 15px;
+    font-weight: 500;
+    color: #333; /* Dark text for messages */
+}
+
+body.dark-mode .login-message {
+    color: #f1f1f1; /* Light text for messages */
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+body.dark-mode .error-message {
+    background-color: #4a2a2e;
+    border-color: #6a3c40;
+    color: #ff9999;
+}
+
+
+/* --- SIDEBAR STYLES --- */
+#sidebar {
+    width: 250px;
+    min-width: 250px; /* Fixed width for expanded state */
+    background: linear-gradient(120deg, #0f172a, #334155); /* Dark gradient */
     color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 10;
+    box-sizing: border-box;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+#sidebar.collapsed {
+    width: 60px;
+    min-width: 60px;
+    padding: 20px 0px;
+    align-items: center;
+}
+
+/* Dark Mode Sidebar (no change, it's already dark) */
+body.dark-mode #sidebar {
+    background: linear-gradient(120deg, #0d1117, #1f2937); /* Slightly darker gradient for dark theme */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+
+#sidebar .sidebar-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: #fff; /* Ensure title is white in sidebar */
+}
+
+#sidebar.collapsed .sidebar-title .label,
+#sidebar.collapsed .sidebar-footer {
+    display: none;
+}
+
+#sidebar .sidebar-title .icon {
+    margin-right: 8px;
+}
+
+#sidebar hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+}
+
+/* Sidebar Menu Grouping */
+.sidebar-menu-group {
+    margin-bottom: 10px; /* Space between main menu headers */
+}
+
+
+/* Menu Headers (Home, Upload, About) - act as toggle buttons */
+.menu-header {
+    background: none;
     border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 6px;
+    color: white;
+    width: 100%;
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
-.logout-btn:hover {
-    background-color: #e53935;
+.menu-header:hover {
+    background-color: rgba(2, 54, 138, 0.7); /* Dark blue hover */
 }
 
-/* === Dark Mode === */
-body.dark-mode,
-#page-container.dark-mode,
-.content.dark-mode,
-.upload-box.dark-mode,
-.sidebar.dark-mode,
-.login-form.dark-mode {
-    background-color: #1e1e1e;
+#sidebar.collapsed .menu-header {
+    justify-content: center;
+    padding: 12px 0; /* Adjust padding for collapsed state */
+}
+
+#sidebar.collapsed .menu-header .label {
+    display: none;
+}
+
+.menu-header .icon {
+    margin-right: 12px;
+    font-size: 1.2em;
+}
+
+/* Submenu Sections (Home-submenu, upload-submenu, about-submenu) */
+.menu-section {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.collapsed-submenu {
+    max-height: 0;
+}
+
+.expanded-submenu {
+    max-height: 500px; /* Large enough to contain all submenu items */
+}
+
+/* NavLinks within submenus */
+.submenu-item {
+    color: #ccc; /* Lighter grey for submenu items */
+    padding: 8px 20px 8px 52px !important; /* Adjusted padding-left for nesting */
+    transition: color 0.2s ease, background-color 0.2s ease;
+    font-size: 0.9em;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+
+#sidebar.collapsed .submenu-item {
+    justify-content: center; /* Center icon when collapsed */
+    padding: 8px 0px 8px 0px !important; /* Adjust padding for collapsed state to center icons */
+    width: 60px; /* Force width to match sidebar */
+}
+
+#sidebar.collapsed .submenu-item .label {
+    display: none;
+}
+
+#sidebar.collapsed .submenu-item .icon {
+    margin-right: 0; /* Ensure no margin pushing icon off-center */
+}
+
+
+.submenu-item .icon {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.submenu-item:hover {
+    color: white;
+    background-color: rgba(2, 54, 138, 0.5); /* Slightly lighter blue hover */
+}
+
+.submenu-item.active {
+    color: white !important;
+    background-color: #007bff !important; /* Primary blue for active link */
+    font-weight: bold;
+}
+
+/* Theme Toggle Section in Sidebar */
+.theme-section {
+    margin-top: auto; /* Pushes to bottom */
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    text-align: center;
+}
+
+
+#sidebar.collapsed .theme-section {
+    padding: 10px 0; /* Adjust padding for collapsed state */
+}
+
+#sidebar.collapsed .theme-label-row .label {
+    display: none; /* Hide 'Theme' label */
+}
+
+#sidebar.collapsed .theme-label-row .icon {
+    margin-right: 0; /* Center theme icon */
+}
+
+/* Add this to your custom.css */
+#sidebar.collapsed .theme-toggle-switch .form-check-label {
+    display: none; /* Hide the "Dark Mode" text label */
+}
+
+/* Ensure the switch itself is centered if possible, though it's already in a flex column */
+#sidebar.collapsed .theme-toggle-col {
+    justify-content: center; /* Center horizontally within its column */
+}
+
+
+.theme-toggle-col {
+    display: flex;
+    flex-direction: column; /* Stack icon/label above switch */
+    align-items: center;
+    width: 100%;
+}
+
+.theme-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #f1f1f1; /* White for labels in dark sidebar */
+}
+
+.theme-label-row .icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* dbc.Switch specific styling */
+.theme-toggle-switch {
+    margin-top: 5px; /* Space between label and switch */
+    /* Further styling for the switch handle/track can be done here if needed */
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #aaa;
+    padding: 15px 0;
+}
+
+
+/* --- NAVBAR STYLES --- */
+.navbar {
+    height: 70px;
+    background-color: #ffffff; /* Light mode white */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #e2e8f0; /* Light border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+
+body.dark-mode .navbar {
+    background-color: #2c2c4a; /* Dark mode background */
+    border-bottom: 1px solid #444;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333; /* Light mode color */
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+body.dark-mode .menu-toggle {
+    color: #f1f1f1; /* Dark mode color */
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo {
+    height: 36px;
+    margin-right: 10px;
+}
+
+.logo-title h4 {
+    margin: 0;
+    color: #333;
+    white-space: nowrap;
+}
+
+body.dark-mode .logo-title h4 {
     color: #f1f1f1;
 }
 
-.sidebar.dark-mode,
-.login-left.dark-mode {
-    background: linear-gradient(120deg, #0f172a, #334155);
+/* User Panel (dbc.DropdownMenu wrapper)
+.user-panel {
+    /* No specific styles needed here, dbc.DropdownMenu handles its own structure */
+/* } */ 
+
+/* Style for the dropdown toggle label (contains status dot and text) */
+.user-dropdown-menu .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    color: #333 !important; /* Ensure it's dark in light mode */
+    font-weight: 500;
+    cursor: pointer;
+    padding-right: 1.5rem; /* Space for the caret */
+    background: none !important; /* Ensure no background on toggle */
+    border: none !important;
+    box-shadow: none !important;
 }
 
-.sidebar.dark-mode a.nav-link {
-    color: #ffffff;
+body.dark-mode .user-dropdown-menu .dropdown-toggle {
+    color: #f1f1f1 !important; /* Ensure it's light in dark mode */
 }
 
-.sidebar.dark-mode a.nav-link.active,
-.sidebar.dark-mode a.nav-link:hover {
-    background-color: #1b263b;
+.status-indicator {
+    font-size: 1.5em; /* Larger circle */
+    line-height: 1; /* Center vertically */
+    transition: color 0.3s ease;
 }
 
-.upload-box.dark-mode {
-    border: 2px dashed #64b5f6;
-    color: #90caf9;
+.user-dropdown-label {
+    display: flex;
+    align-items: center;
 }
 
-#page-container.dark-mode .dash-spreadsheet {
-    background-color: #1e1e1e;
+/* Style for actual dropdown menu */
+.user-dropdown-menu .dropdown-menu {
+    background-color: white; /* Light mode background */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    min-width: 180px; /* Adjust dropdown width */
+    margin-top: 5px;
+}
+
+body.dark-mode .user-dropdown-menu .dropdown-menu {
+    background-color: #3b3b5c; /* Dark mode background */
+    border: 1px solid #555;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Styles for dropdown menu items */
+.user-dropdown-item {
+    padding: 10px 15px;
+    color: #333; /* Dark text */
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body.dark-mode .user-dropdown-item {
+    color: #f1f1f1; /* Light text */
+}
+
+.user-dropdown-item:hover {
+    background-color: #f0f0f0;
+    color: #007bff; /* Primary blue on hover */
+}
+
+body.dark-mode .user-dropdown-item:hover {
+    background-color: #55557a;
     color: #f1f1f1;
-    border-color: #333;
 }
 
-#page-container.dark-mode .dash-header {
-    background-color: #0077b6;
-    color: #ffffff;
+.logout-link {
+    color: #dc3545 !important; /* Red for logout */
+    font-weight: bold;
+}
+.logout-link:hover {
+    background-color: #f8d7da !important;
+}
+body.dark-mode .logout-link:hover {
+    background-color: #7a3b3b !important; /* Darker red hover for dark mode */
 }
 
-#page-container.dark-mode .dash-cell {
+/* Guest user panel styling (when not logged in) */
+.guest-user-panel {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 500;
+}
+
+body.dark-mode .guest-user-panel {
     color: #f1f1f1;
-    background-color: #1e1e1e;
 }
 
-#page-container.dark-mode #churn-graph {
-    background-color: #1e1e1e;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+
+/* --- MAIN CONTENT AREA & COMPONENTS STYLES --- */
+.main-body {
+    flex: 1; /* Main body takes remaining space */
+    display: flex; 
+    flex-direction: column; /* Stacks navbar on top, content below: navbar \n content */
+    transition: margin-left 0.3s ease, width 0.3s ease; /*Animate margin and width*/
+    height: 100vh;
+    overflow: hidden; 
+    box-sizing: border-box; /* Include padding/border in width calculation */
 }
 
-#page-container.dark-mode a {
-    background-color: #00a8e8;
-    color: #fff;
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling for content if it overflows */
+    background-color: #f5f7fa; /* Light background for content area */
+    box-sizing: border-box;
 }
 
-/* === Responsive === */
-@media only screen and (max-width: 768px) {
-    .sidebar {
-        position: relative;
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px;
+
+body.dark-mode .content {
+    background-color: #1a1a2e; /* Dark background for content area */
+}
+
+.page-content-wrapper {
+    background-color: #ffffff; /* White background for individual page sections */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Added for horizontal scrolling of content within pages */
+}
+
+body.dark-mode .page-content-wrapper {
+    background-color: #2c2c4a;
+    color: #f1f1f1;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.page-title {
+    color: #007bff; /* Primary blue for titles */
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+body.dark-mode .page-title {
+    color: #87ceeb; /* Lighter blue for dark mode titles */
+}
+
+.separator { /* Horizontal Rule/Divider */
+  border-top: 1px solid #e0e0e0;
+  margin: 30px 0;
+}
+
+body.dark-mode .separator {
+  border-top: 1px solid #555;
+}
+
+/* Upload Box */
+.upload-box {
+    width: 70%;
+    padding: 40px 20px; /* Increased padding slightly for visual appeal */
+    border: 2px dashed #007bff; /* Primary blue dashed border */
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px auto;
+    background-color: rgba(0, 123, 255, 0.05); /* Light blue tint */
+    color: #007bff;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+body.dark-mode .upload-box {
+    border-color: #87ceeb;
+    background-color: rgba(135, 206, 235, 0.05);
+    color: #87ceeb;
+}
+
+.upload-box:hover {
+    border-color: #0056b3;
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+}
+
+body.dark-mode .upload-box:hover {
+    border-color: #6495ed;
+    background-color: rgba(100, 149, 237, 0.1);
+    color: #6495ed;
+}
+
+.upload-box a {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+body.dark-mode .upload-box a {
+    color: #87ceeb;
+}
+
+.upload-box a:hover {
+    color: #0056b3;
+}
+
+body.dark-mode .upload-box a:hover {
+    color: #6495ed;
+}
+
+
+/* Download Button and Template Button */
+.download-btn, .template-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #2980b2; /* Blueish-grey */
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:hover, .template-btn:hover {
+    background-color: #005f99;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* GLOBAL PREDICTION OUTPUT CONTAINER */
+#global-prediction-output-container {
+    margin-top: 20px;
+    padding: 25px;
+    background-color: #ffffff; /* Light mode white */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+body.dark-mode #global-prediction-output-container {
+    background-color: #2c2c4a;
+    color: #f1f1f1;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+
+/* --- DASH TABLE STYLES --- */
+.dash-spreadsheet {
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    overflow: auto; /* Allow both horizontal and vertical scrolling if content overflows */
+    /* OR for horizontal specifically: overflow-x: auto; */
+}
+
+body.dark-mode .dash-spreadsheet {
+    border: 1px solid #555; /* Dark border */
+}
+
+.dash-header {
+    background-color: #0077b6 !important; /* Blue header */
+    color: white !important;
+    font-weight: bold;
+}
+
+body.dark-mode .dash-header {
+    background-color: #1f2937 !important; /* Darker header */
+}
+
+.dash-cell {
+    background-color: #ffffff !important; /* White cell background */
+    color: #333 !important; /* Dark text */
+    border: 1px solid #ddd !important; /* Light cell border */
+}
+
+body.dark-mode .dash-cell {
+    background-color: #2a2a3e !important; /* Dark cell background */
+    color: #f1f1f1 !important; /* Light text */
+    border: 1px solid #555 !important; /* Dark cell border */
+}
+
+/* Specific styling for the churn prediction column */
+.dash-cell-value[data-column-id="Predicted_Churn"] {
+    font-weight: bold;
+}
+
+/* --- DASH TABS STYLES FOR VISUALS --- */
+.custom-tab-container .dash-tabs {
+    border: none !important;
+}
+
+.custom-tab {
+    background-color: #f0f0f0 !important; /* Light grey */
+    color: #555 !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 12px 20px !important;
+    font-weight: 600 !important;
+    border: 1px solid #e0e0e0 !important;
+    border-bottom: none !important;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .custom-tab {
+    background-color: #333 !important;
+    color: #bbb !important;
+    border-color: #555 !important;
+}
+
+.custom-tab--selected {
+    background-color: #007bff !important; /* Primary blue */
+    color: white !important;
+    border-color: #007bff !important;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .custom-tab--selected {
+    background-color: #004d99 !important; /* Darker blue for selected tab in dark mode */
+    border-color: #004d99 !important;
+}
+
+/* Adjust the content below the tabs (where the Plotly graphs reside) */
+.dash-tabs + div {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* NEW: Make this area scrollable and give it a max-height */
+    max-height: calc(100vh - 60px - 100px - 80px); /* Example: 100vh - navbar_height - approximate_tab_header_height - some_margin/padding */
+    overflow-y: auto; /* Enable vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+body.dark-mode .dash-tabs + div {
+    background-color: #2c2c4a;
+    border-color: #444;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure Plotly chart elements are legible in dark mode */
+.dark-mode .modebar-btn {
+    color: #f1f1f1 !important; /* Dark mode buttons in plotly graphs */
+}
+.dark-mode .js-plotly-plot .plotly .xaxislayer-above .xtick .lines,
+.dark-mode .js-plotly-plot .plotly .yaxislayer-above .ytick .lines {
+    stroke: #f1f1f1 !important; /* Ensure tick lines are visible */
+}
+
+/* UTILITY CLASSES */
+.text-center {
+    text-align: center;
+}
+.p-4 {
+    padding: 1rem; /* 16px */
+}
+.mt-4 {
+    margin-top: 1rem;
+}
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+
+
+/* --- MOBILE RESPONSIVENESS (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* General Layout Adjustments */
+    .body-wrapper {
+        flex-direction: column; /* Stack sidebar on top if needed, or hide */
     }
-    .content {
-        margin-left: 0;
-        padding: 20px;
-        width: 100%;
+
+    /* Sidebar - Initially hidden on smaller screens */
+    #sidebar {
+        width: 100%; /* Full width when active */
+        height: 100%;
+        position: fixed; /* Keep fixed */
+        top: 0;
+        left: 0;
+        transform: translateX(-100%); /* Start off-screen to the left */
+        padding: 20px 0;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.3); /* Add shadow when open */
+        z-index: 100; /* Ensure it's above everything else when open */
+        display: flex; /* Ensure flex properties apply */
+        flex-direction: column;
     }
-    .sidebar-title {
+
+    #sidebar.expanded {
+        transform: translateX(0); /* Slide in when expanded */
+    }
+
+    /* Main Body - Always full width, no margin-left from sidebar */
+    .main-body {
+        margin-left: 0 !important; /* Override desktop margin */
+        width: 100% !important; /* Always full width */
+        height: 100vh;
+        overflow-y: auto; /* Allow scrolling for content */
+    }
+
+    /* Navbar - Ensure toggle button is prominent */
+    .navbar {
+        padding: 10px 15px; /* Adjust padding */
+    }
+
+    .menu-toggle {
+        display: block; /* Ensure hamburger is visible */
+    }
+
+    .logo-title h4 {
+        font-size: 1.1em; /* Smaller title */
+    }
+
+    /* Hide sidebar labels and icons when collapsed (relevant for smaller screens if sidebar isn't fully off-screen) */
+    #sidebar.collapsed .label,
+    #sidebar.collapsed .sidebar-footer,
+    #sidebar.collapsed .menu-header .label,
+    #sidebar.collapsed .submenu-item .label {
         display: none;
     }
-    .sidebar a.nav-link {
-        font-size: 14px;
-        padding: 8px 12px;
+    #sidebar.collapsed .menu-header .icon,
+    #sidebar.collapsed .submenu-item .icon {
+        margin-right: 0;
+    }
+    #sidebar.collapsed .sidebar-title .label {
+        display: none; /* Hide app title label when sidebar collapses fully on desktop */
+    }
+
+    /* Login Page Adjustments */
+    .login-wrapper {
+        flex-direction: column; /* Stack login sections vertically */
+        padding: 20px;
+        height: auto; /* Allow height to adjust */
+        min-height: 100vh;
+    }
+
+    .login-left, .login-right {
+        flex: none; /* Don't grow, use content size */
+        width: 100%;
+        padding: 20px;
+    }
+
+    .login-image {
+        max-width: 90%; /* Adjust image size */
+    }
+
+    .login-form-box {
+        width: 95%; /* Adjust form width */
+        max-width: none; /* Remove max-width constraint */
+        margin-top: 20px;
+    }
+
+    /* Page Content Wrapper */
+    .page-content-wrapper {
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    /* Upload Box */
+    .upload-box {
+        width: 95%; /* Make upload box wider on mobile */
+        margin: 15px auto;
+        padding: 30px 15px;
+        font-size: 1em;
+    }
+    .upload-box a {
+        font-size: 0.9em;
+    }
+
+    /* Tables and Charts within content should already be scrollable due to overflow-x: auto on parent */
+    /* Adjust font sizes if necessary for readability */
+    .page-title {
+        font-size: 1.5em;
+    }
+
+    /* Specific adjustment for Plotly titles in mobile to prevent overflow */
+    .js-plotly-plot .plotly .main-svg .infolayer .g-title {
+        white-space: normal !important; /* Allow title to wrap */
+        text-align: center;
+        font-size: 16px !important; /* Adjust font size if necessary */
+    }
+}
+
+/* --- Further Mobile Specific Adjustments (max-width: 480px) --- */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 10px;
+    }
+
+    .logo-title h4 {
+        font-size: 1em;
+    }
+
+    /* Adjust padding for submenu items for very small screens */
+    .submenu-item {
+        padding: 8px 10px 8px 40px !important; /* Reduce overall padding and left padding */
+        font-size: 0.85em;
+    }
+    .submenu-item .icon {
+        font-size: 1em;
+    }
+
+    .login-title {
+        font-size: 2em;
+    }
+
+    .login-form-box {
+        padding: 25px;
+    }
+
+    .login-input {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .login-btn {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .page-content-wrapper {
+        padding: 10px;
+    }
+
+    .upload-box {
+        padding: 20px 10px;
+        font-size: 0.9em;
     }
 }
