@@ -5,3 +5,5 @@ scikit-learn
 plotly
 joblib
 gunicorn
+dash_bootstrap_components
+python-dotenv
